@@ -1,26 +1,68 @@
-#  Как работать с репозиторием финального задания
+# Kittygram
+Kittygram - веб-приложение для публикации фотографий котов.  
+Пользователи могут регистрироваться, добавлять котов, загружать фотографии и просматривать их через веб-интерфейс и API.
 
-## Что нужно сделать
+Функциональность
+- Регистрация и авторизация пользователей (Djoser + TokenAuth)
+- Добавление и редактирование карточек котов
+- Загрузка изображений котов
+- REST API на Django REST Framework
+- Админ-панель Django
+- SPA интерфейс на React
+- Раздача через Nginx
 
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
+Стек технологий
 
-## Как проверить работу с помощью автотестов
+Backend:
+- Python 3.10
+- Django
+- Django REST Framework
+- Djoser
+- PostgreSQL
+- Gunicorn
 
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
-```
+Frontend:
+- React
+- JavaScript
+- HTML/CSS
 
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
+DevOps:
+- Docker
+- Docker Compose
+- Nginx
+- GitHub Actions (CI/CD)
 
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
+Медиа и статика
+Static files обслуживаются через Nginx
+Media файлы сохраняются в Docker volume и доступны по /media/
 
-## Чек-лист для проверки перед отправкой задания
+CI/CD
 
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+Проект использует GitHub Actions:
+Запуск тестов при push
+Сборка Docker образов
+Отправка образов в DockerHub
+
+
+Запуск проекта
+1) Клонировать репозиторий
+git clone repo-url
+cd kittygram_final
+2) Создать .env файл
+POSTGRES_DB=kittygram
+POSTGRES_USER=kittygram_user
+POSTGRES_PASSWORD=kittygram_password
+
+DB_HOST=db
+DB_PORT=5432
+
+SECRET_KEY=your-secret-key
+DEBUG=False
+ALLOWED_HOSTS=localhost,127.0.0.1
+
+3) docker compose up -d --build
+
+Доступ к сервисам
+Frontend: http://localhost
+API: http://localhost/api/
+Admin: http://localhost/admin/
