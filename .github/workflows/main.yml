@@ -29,6 +29,14 @@ jobs:
           ruff check .
 
       - name: Run tests
+        env:
+          POSTGRES_DB: kittygram
+          POSTGRES_USER: kittygram_user
+          POSTGRES_PASSWORD: kittygram_password
+          DB_HOST: localhost
+          DB_PORT: 5432
+          SECRET_KEY: test-secret-key
+          DEBUG: False
         run: |
           cd backend
           python manage.py test
